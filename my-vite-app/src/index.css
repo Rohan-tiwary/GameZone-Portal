@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+.neon-text {
+    color: #00ffcc;
+    text-shadow: 0 0 3px #00ffcc, 0 0 6px #00ffcc, 0 0 4px #00cc99;
+  }
+  
+  .glow-effect {
+    text-shadow: 0 0 5px #fff, 0 0 10px #00ffcc, 0 0 15px #00cc99;
+  }
+  
