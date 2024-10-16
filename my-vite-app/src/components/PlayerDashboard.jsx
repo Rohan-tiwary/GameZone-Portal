@@ -1,6 +1,13 @@
+// src/components/PlayerDashboard.jsx
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import GameOption from './GameOption'; // Imported game options component
+import GameOption from './GameOption'; // Game options component
+import Lobby from './Lobby';
+import {
+  FaMedal, FaGamepad, FaWallet, FaClock, 
+  FaLink, FaUserFriends, FaPowerOff 
+} from 'react-icons/fa';
+import { GiPistolGun, GiTrophyCup, GiMatchHead } from 'react-icons/gi';
 
 const PlayerDashboard = () => {
   const [faqOpen, setFaqOpen] = useState(null);
@@ -20,145 +27,115 @@ const PlayerDashboard = () => {
   const referralLink = "https://example.com/referral?code=12345";
 
   const faqs = [
-    { question: "How do I earn points?", answer: "You earn points by winning matches and completing daily tasks." },
-    { question: "Can I redeem points for rewards?", answer: "Yes! Points can be redeemed for in-game items and skins." },
-    { question: "What happens if I lose a match?", answer: "Losing won’t reduce your points, but it won’t increase them either." },
-    { question: "How do I refer friends?", answer: "Use your unique referral link to invite friends and earn extra points." },
-    { question: "Where can I find more help?", answer: "Visit our Help Center or contact support through the in-game chat." }
+    { question: "How do I earn points?", answer: "Earn points by winning matches and completing daily tasks." },
+    { question: "Can I redeem points?", answer: "Yes! Points can be redeemed for in-game items and skins." },
+    { question: "What if I lose a match?", answer: "Losing won’t reduce points, but it won’t increase them either." },
+    { question: "How to refer friends?", answer: "Use your referral link to invite friends and earn points." },
+    { question: "Need more help?", answer: "Visit the Help Center or contact support in-game." },
   ];
 
-  const toggleFaq = (index) => {
-    setFaqOpen(faqOpen === index ? null : index);
-  };
+  const toggleFaq = (index) => setFaqOpen(faqOpen === index ? null : index);
 
   return (
-    <div className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white min-h-screen p-8">
+    <div className="bg-gradient-to-r from-gray-900 via-black to-gray-800 text-white min-h-screen p-8 font-mono select-none">
       {/* Profile Section */}
-      <div className="flex items-center mb-8 gap-6">
-    <div className="relative group">
-      <img
-        src="https://photosvibe.in/wp-content/uploads/cute-girl-pic47.jpg"
-        alt="Profile"
-        className="w-24 h-24 rounded-full border-4 border-transparent 
-          bg-gradient-to-r from-pink-500 to-blue-400 p-1 
-          object-cover transform transition duration-500 ease-in-out 
-          hover:rotate-12 group-hover:scale-110"
-      />
-      <span className="absolute -bottom-2 -right-2 w-5 h-5 rounded-full bg-green-500 border-2 border-gray-900"></span>
-    </div>
+      <div className="flex items-center mb-10 gap-6">
+        <div className="relative group">
+          <img
+            src="https://photosvibe.in/wp-content/uploads/cute-girl-pic47.jpg"
+            alt="Profile"
+            className="w-28 h-28 rounded-full p-1 bg-gradient-to-r from-pink-500 to-purple-600 object-cover 
+              transition-transform duration-500 hover:scale-110 hover:rotate-12 shadow-lg"
+          />
+          <span className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-green-500 border-2 border-gray-900 animate-pulse"></span>
+        </div>
+        <div className="ml-3">
+          <h2 className="text-4xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 animate-glow">
+            Player123
+          </h2>
+          <p className="text-lg text-gray-400 tracking-wide">
+            ID: <span className="text-yellow-400">#56789</span>
+          </p>
+        </div>
+      </div>
 
-    <div className="ml-2">
-      <h2 className="text-3xl font-extrabold text-transparent 
-        bg-clip-text bg-gradient-to-r from-pink-400 to-yellow-500 
-        animate-pulse">
-        Player123
-      </h2>
-      <p className="text-lg text-gray-400">
-        ID: <span className="animate-slide-left">#56789</span>
-      </p>
-    </div>
-  </div>
-
-      {/* Main Heading with Neon Glow */}
-      <h1 className="text-5xl font-semibold text-center mb-8 neon-text glow-effect font-serif">
+      {/* Dashboard Heading */}
+      <h1 className="text-6xl text-center mb-8 glow-effect tracking-wider neon-text">
         🎮 Player Dashboard 🎮
       </h1>
 
-      {/* Points Summary Section */}
-      <div className="bg-gray-800 p-8 rounded-lg shadow-lg w-full mb-10">
+      {/* Points Summary */}
+      <div className="bg-gray-800 p-8 rounded-xl shadow-lg mb-10 border border-gray-700 hover:shadow-indigo-500/50">
         <h2 className="text-3xl font-bold mb-6 text-center glow-effect">
           💰 Points Summary 💰
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {[
-            { label: 'Last Points Earned', value: playerStats.lastPointsEarned, emoji: '✨' },
-            { label: 'Total Points Earned', value: playerStats.totalPointsEarned, emoji: '🏆' },
-            { label: 'Total Withdrawal', value: playerStats.withdrawal, emoji: '📤' },
-            { label: 'Total Deposit', value: playerStats.deposit, emoji: '📥' },
+            { label: 'Last Points Earned', value: playerStats.lastPointsEarned, Icon: FaMedal },
+            { label: 'Total Points Earned', value: playerStats.totalPointsEarned, Icon: GiTrophyCup },
+            { label: 'Total Withdrawal', value: playerStats.withdrawal, Icon: FaWallet },
+            { label: 'Total Deposit', value: playerStats.deposit, Icon: FaGamepad },
           ].map((stat, index) => (
-            <div
-              key={index}
-              className="bg-gray-700 p-6 rounded-lg shadow-md text-center transform transition-transform duration-300 hover:scale-105 hover:shadow-blue-500/40"
-            >
-              <p className="text-xl font-semibold mb-2">
-                {stat.emoji} {stat.label}
-              </p>
-              <p className="text-3xl neon-text">{stat.value}</p>
+            <div key={index} className="bg-gray-700 p-6 rounded-lg shadow-md text-center hover:scale-105 transition-transform duration-300">
+              <stat.Icon className="text-4xl text-blue-400 mb-3 mx-auto" />
+              <p className="text-xl font-semibold mb-2">{stat.label}</p>
+              <p className="text-3xl text-yellow-400">{stat.value}</p>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Player Statistics Section */}
-      <div className="bg-gray-800 p-8 rounded-lg shadow-lg w-full mb-10">
-        <h2 className="text-3xl font-bold mb-6 text-center glow-effect">
-          📊 Player Statistics 📊
-        </h2>
+      {/* Player Stats */}
+      <div className="bg-gray-800 p-8 rounded-xl shadow-lg mb-10 hover:shadow-blue-500/50">
+        <h2 className="text-3xl font-bold mb-6 text-center glow-effect">📊 Player Stats 📊</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {[
-            { label: 'Total Matches Played', value: playerStats.totalMatches, emoji: '🎲' },
-            { label: 'Total Wins', value: playerStats.wins, emoji: '🏅' },
-            { label: 'Total Kills', value: playerStats.kills, emoji: '🔫' },
-            { label: 'Total Time Spent', value: playerStats.timeSpent, emoji: '⏱️' },
-            { label: 'Referred Friends', value: playerStats.referralCount, emoji: '👥' },
-            {
-              label: 'Referral Link',
-              value: (
-                <a
-                  href={referralLink}
-                  className="text-blue-220 hover:underline break-all hover:scale-105"
-                >
+            { label: 'Total Matches', value: playerStats.totalMatches, Icon: GiMatchHead },
+            { label: 'Total Wins', value: playerStats.wins, Icon: GiTrophyCup },
+            { label: 'Total Kills', value: playerStats.kills, Icon: GiPistolGun },
+            { label: 'Time Spent', value: playerStats.timeSpent, Icon: FaClock },
+            { label: 'Referred Friends', value: playerStats.referralCount, Icon: FaUserFriends },
+            { label: 'Referral Link', value: referralLink, Icon: FaLink },
+          ].map((stat, index) => (
+            <div key={index} className="bg-gray-700 p-6 rounded-lg shadow-md text-center hover:scale-105 transition-all duration-300">
+              <stat.Icon className="text-4xl text-red-400 mb-3 mx-auto" />
+              <p className="text-xl font-semibold mb-2">{stat.label}</p>
+              {stat.label === 'Referral Link' ? (
+                <a href={referralLink} className="text-blue-300 hover:underline">
                   {referralLink}
                 </a>
-              ),
-              emoji: '🔗',
-            },
-          ].map((stat, index) => (
-            <div
-              key={index}
-              className="bg-gray-700 p-6 rounded-lg shadow-md text-center transform transition-transform duration-300 hover:scale-105 hover:shadow-blue-500/40"
-            >
-              <p className="text-xl font-semibold mb-2">
-                {stat.emoji} {stat.label}
-              </p>
-              <p className="text-3xl neon-text">{stat.value}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Game Options Component */}
-      <GameOption />
-
-      {/* FAQ Section */}
-      <div className="bg-gray-800 p-8 rounded-lg shadow-lg mt-10">
-        <h2 className="text-3xl font-bold mb-6 text-center glow-effect">
-          ❓ Help / FAQ ❓
-        </h2>
-        <div className="space-y-4">
-          {faqs.map((faq, index) => (
-            <div key={index} className="bg-gray-700 rounded-lg p-4 shadow-md">
-              <button
-                className="w-full text-left text-xl font-semibold focus:outline-none"
-                onClick={() => toggleFaq(index)}
-              >
-                {faq.question}
-                <span className="float-right">
-                  {faqOpen === index ? '▲' : '▼'}
-                </span>
-              </button>
-              {faqOpen === index && (
-                <p className="mt-2 text-lg text-gray-300">{faq.answer}</p>
+              ) : (
+                <p className="text-3xl text-yellow-400">{stat.value}</p>
               )}
             </div>
           ))}
         </div>
       </div>
 
-      {/* Logout Link */}
+      {/* Game Options and Lobby */}
+      <GameOption />
+      <Lobby />
+
+      {/* FAQ Section */}
+      <div className="bg-gray-800 p-8 rounded-xl shadow-lg mt-10">
+        <h2 className="text-3xl font-bold mb-6 text-center glow-effect">❓ FAQ ❓</h2>
+        <div className="space-y-4">
+          {faqs.map((faq, index) => (
+            <div key={index} className="bg-gray-700 p-4 rounded-lg shadow-md">
+              <button className="w-full text-left text-xl font-semibold" onClick={() => toggleFaq(index)}>
+                {faq.question}
+                <span className="float-right">{faqOpen === index ? '▲' : '▼'}</span>
+              </button>
+              {faqOpen === index && <p className="mt-2 text-lg text-gray-300">{faq.answer}</p>}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Logout Button */}
       <div className="mt-8 text-center">
-        <Link to="/" className="text-blue-400 hover:underline text-lg">
-          🚪 Logout
+        <Link to="/" className="text-red-400 hover:underline text-lg flex items-center justify-center gap-2">
+          <FaPowerOff /> Logout
         </Link>
       </div>
     </div>

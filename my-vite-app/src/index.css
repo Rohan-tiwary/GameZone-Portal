@@ -4,12 +4,93 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
 
+/* Base Setup */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Orbitron', sans-serif;
+  background: radial-gradient(circle, #0a0a0a, #000000);
+  overflow-x: hidden;
+}
+
+/* Neon Text Effect */
 .neon-text {
-    color: #00ffcc;
-    text-shadow: 0 0 3px #00ffcc, 0 0 6px #00ffcc, 0 0 4px #00cc99;
+  color: #00ffcc;
+  text-shadow: 
+    0 0 8px #00ffcc, 
+    0 0 16px #00ffcc, 
+    0 0 24px #00cc99, 
+    0 0 32px #009973;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Pulse Animation for Glow Effect */
+@keyframes neonPulse {
+  0%, 100% {
+    text-shadow: 
+      0 0 8px #00ffcc, 
+      0 0 16px #00ffcc, 
+      0 0 24px #00cc99, 
+      0 0 32px #009973;
   }
-  
-  .glow-effect {
-    text-shadow: 0 0 5px #fff, 0 0 10px #00ffcc, 0 0 15px #00cc99;
+  50% {
+    text-shadow: 
+      0 0 12px #33ffff, 
+      0 0 24px #00ffcc, 
+      0 0 36px #00cc99, 
+      0 0 48px #009973;
   }
-  
+}
+
+/* Glow Text with Animation */
+.glow-effect {
+  color: #ffffff;
+  text-shadow: 
+    0 0 10px #ffffff, 
+    0 0 20px #00ffcc, 
+    0 0 30px #00cc99, 
+    0 0 40px #009973;
+  animation: neonPulse 3s infinite alternate;
+}
+
+/* Button Hover Glow Effect */
+.button-glow {
+  background-color: transparent;
+  border: 2px solid #00ffcc;
+  color: #00ffcc;
+  padding: 12px 24px;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.button-glow:hover {
+  background-color: #00ffcc;
+  color: #000000;
+  text-shadow: none;
+  transform: scale(1.1);
+}
+
+/* Optional Section: Animated Heading Entry */
+@keyframes fadeInGlow {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+    text-shadow: none;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    text-shadow: 
+      0 0 10px #ffffff, 
+      0 0 20px #00ffcc, 
+      0 0 30px #00cc99;
+  }
+}
+
+.animated-heading {
+  animation: fadeInGlow 2s ease-in-out forwards;
+  opacity: 0; /* Ensure it's hidden before animation starts */
+}
