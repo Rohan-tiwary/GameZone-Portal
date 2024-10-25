@@ -8,23 +8,19 @@ const GameOptions = () => {
 
   const maps = ['India', 'Indonesia'];
 
-  const handleMapChange = (e) => {
-    setSelectedMap(e.target.value);
-  };
-
-  const handleModeChange = (e) => {
-    setPlayMode(e.target.value);
-  };
-
+  const handleMapChange = (e) => setSelectedMap(e.target.value);
+  const handleModeChange = (e) => setPlayMode(e.target.value);
   const generateTournamentCode = () => {
-    const code = Math.random().toString(36).substr(2, 6).toUpperCase(); // Generate a random 6-character code
+    const code = Math.random().toString(36).substr(2, 6).toUpperCase();
     setTournamentCode(code);
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-purple-800 via-black to-gray-900 p-10 flex items-center justify-center">
-      <div className="w-full max-w-xl p-8 bg-gradient-to-b from-gray-800 to-gray-900 rounded-lg shadow-2xl border border-purple-500">
-        <h2 className="text-4xl font-extrabold text-yellow-400 mb-6 text-center tracking-wide">
+    <div className="min-h-screen bg-gradient-to-r from-purple-800 via-black to-gray-900 p-6 flex items-center justify-center">
+      <div className="w-full max-w-2xl p-6 md:p-8 bg-gradient-to-b from-gray-800 to-gray-900 rounded-lg shadow-2xl border border-purple-500">
+
+        {/* Heading */}
+        <h2 className="text-3xl md:text-4xl font-extrabold text-yellow-400 mb-6 text-center tracking-wide">
           🎮 Game Options 🎮
         </h2>
 
@@ -97,6 +93,7 @@ const GameOptions = () => {
             </div>
           )}
         </div>
+
       </div>
     </div>
   );
